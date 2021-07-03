@@ -27,7 +27,6 @@ namespace RandomThoughts.UnitTests
             var getBuffer = memoryStream.GetBuffer();
 
             // Assert
-
             Assert.AreNotEqual(_buffer.Length, getBuffer.Length);
         }
 
