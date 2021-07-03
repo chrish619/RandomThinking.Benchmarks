@@ -1,7 +1,7 @@
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Jobs;
 
-namespace RandomThinking.BenchMarks
+namespace RandomThoughts.BenchMarks
 {
     [SimpleJob(RuntimeMoniker.Net48, baseline: true)]
     //[SimpleJob(RuntimeMoniker.NetCoreApp31)]
@@ -27,42 +27,46 @@ namespace RandomThinking.BenchMarks
         [Benchmark(Baseline = true)]
         public void ForEach_Iteration()
         {
-            var ms = new System.IO.MemoryStream();
-
-            foreach (var b in _buffer)
+            using (var ms = new System.IO.MemoryStream())
             {
-                ms.WriteByte(b);
+                foreach (var b in _buffer)
+                {
+                    ms.WriteByte(b);
+                }
             }
         }
 
         [Benchmark]
         public void For_Iteration()
         {
-            var ms = new System.IO.MemoryStream();
-
-            for (var i = 0; i < _buffer.Length; i++)
+            using (var ms = new System.IO.MemoryStream())
             {
-                ms.WriteByte(_buffer[i]);
+
+                for (var i = 0; i < _buffer.Length; i++)
+                {
+                    ms.WriteByte(_buffer[i]);
+                }
             }
         }
 
         [Benchmark]
         public void Stream_Read()
         {
-            var ms = new System.IO.MemoryStream();
-
-            int read = 0;
-            using (var sr = new System.IO.MemoryStream(_buffer))
+            using (var ms = new System.IO.MemoryStream())
             {
-                while (read != -1)
+                int read = 0;
+                using (var sr = new System.IO.MemoryStream(_buffer))
                 {
-                    read = sr.ReadByte();
-                    if (read == -1)
+                    while (read != -1)
                     {
-                        break;
-                    }
+                        read = sr.ReadByte();
+                        if (read == -1)
+                        {
+                            break;
+                        }
 
-                    ms.WriteByte((byte)read);
+                        ms.WriteByte((byte)read);
+                    }
                 }
             }
         }

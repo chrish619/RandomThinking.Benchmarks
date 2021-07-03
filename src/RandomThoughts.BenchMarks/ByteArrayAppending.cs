@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Jobs;
 
-namespace RandomThinking.BenchMarks
+namespace RandomThoughts.BenchMarks
 {
     [SimpleJob(RuntimeMoniker.Net48, baseline: true)]
     //[SimpleJob(RuntimeMoniker.NetCoreApp31)]

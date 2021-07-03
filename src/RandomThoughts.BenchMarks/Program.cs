@@ -1,13 +1,13 @@
 ﻿using System;
 using BenchmarkDotNet.Running;
 
-namespace RandomThinking.BenchMarks
+namespace RandomThoughts.BenchMarks
 {
     class Program
     {
         static void Main(string[] args)
         {
-            var summary = BenchmarkRunner.Run(typeof(Program).Assembly);
+            var summary = BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args);
         }
     }
 }
